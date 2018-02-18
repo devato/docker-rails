@@ -27,6 +27,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.7'
   gem 'pry-rails'
+  gem 'byebug'
 end
 
 group :development do
@@ -37,4 +38,5 @@ group :development do
   gem 'rack-mini-profiler'
   gem 'brakeman', :require => false
   gem 'rubocop'
+  gem 'better_errors'
 end

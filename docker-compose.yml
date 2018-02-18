@@ -6,9 +6,12 @@ services:
       - 'postgres'
       - 'redis'
     build: .
+    entrypoint: './docker-entrypoint.sh'
+    command: puma -C config/puma.rb
     ports:
       - '3000:3000'
     volumes:
+      - 'bundle_cache:/bundle'
       - '.:/app'
     env_file:
       - '.env'
@@ -38,6 +41,7 @@ services:
     build: .
     command: sidekiq -C config/sidekiq.yml.erb
     volumes:
+      - 'bundle_cache:/bundle'
       - '.:/app'
     env_file:
       - '.env'
@@ -50,6 +54,7 @@ services:
     ports:
       - '28080:28080'
     volumes:
+      - 'bundle_cache:/bundle'
       - '.:/app'
     env_file:
       - '.env'
@@ -57,3 +62,4 @@ services:
 volumes:
   redis:
   postgres:
+  bundle_cache:

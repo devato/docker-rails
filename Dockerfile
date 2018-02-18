@@ -6,15 +6,15 @@ LABEL maintainer="Troy Martin <troy@devato.com>"
 
 ENV APP_HOME /app
 
-# cache bundle
-WORKDIR /tmp
-COPY Gemfile Gemfile
-COPY Gemfile.lock Gemfile.lock
-RUN bundle install
+# Bundle installs with binstubs to our custom /bundle/bin volume path.
+# Let system use those stubs.
+ENV BUNDLE_PATH=/bundle \
+    BUNDLE_BIN=/bundle/bin \
+    GEM_HOME=/bundle
+ENV PATH="${BUNDLE_BIN}:${PATH}"
 
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
 COPY . $APP_HOME
 
-CMD puma -C config/puma.rb

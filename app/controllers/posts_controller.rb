@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = ApiService.get_posts
+    @posts = Post.all
   end
 
   def show

@@ -6,7 +6,7 @@ services:
       - 'postgres'
       - 'redis'
     build: .
-    entrypoint: './docker/entrypoint.sh'
+    entrypoint: './docker/entrypoints/web.sh'
     command: bundle exec puma -C config/puma.rb
     ports:
       - '3000:3000'
@@ -40,6 +40,7 @@ services:
 
   sidekiq:
     <<: *web_base
+    entrypoint: './docker/entrypoints/sidekiq.sh'
     command: bundle exec sidekiq
     ports: []
     depends_on:

@@ -1,24 +1,16 @@
-# README
+# Dockerizing Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This repo was built while creating the (Dockerizing Rails 5)[https://devato.com/dockerizing-a-rails-5-app-with-multiple-services/] guide.
 
-Things you may want to cover:
 
-* Ruby version
+## Checkout Tags
 
-* System dependencies
+The guide's progress is stored in different tags.
 
-* Configuration
+To checkout (Part 1)[https://devato.com/dockerizing-a-rails-5-app-with-multiple-services/]:
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+$ git clone git@github.com:devato/docker-rails.git
+$ cd docker-rails
+$ git checkout tags/part-1 -b master
+```

@@ -28,6 +28,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'pry-rails'
   gem 'byebug'
+  gem 'headless'
 end
 
 group :development do

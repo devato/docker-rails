@@ -1,5 +1,4 @@
 #!/bin/bash
 
-docker-sync-stack stop
 docker-sync-stack clean
 docker-sync-stack start

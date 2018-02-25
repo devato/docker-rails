@@ -4,5 +4,5 @@
 //= require_self
 
 $(function(){
-alert('tests');
+  console.log('test5');
 });

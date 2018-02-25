@@ -1,13 +1,20 @@
----
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASS'] %>
 
 development:
-  url: <%= ENV['DATABASE_URL'].gsub('?', '_development?') %>
-
+  <<: *default
+  database: <%= ENV['DB_NAME'] %>_development
 test:
-  url: <%= ENV['DATABASE_URL'].gsub('?', '_test?') %>
-
+  <<: *default
+  database: <%= ENV['DB_NAME'] %>_test
 staging:
-  url: <%= ENV['DATABASE_URL'].gsub('?', '_staging?') %>
-
+  <<: *default
+  database: <%= ENV['DB_NAME'] %>_staging
 production:
-  url: <%= ENV['DATABASE_URL'].gsub('?', '_production?') %>
+  <<: *default
+  database: <%= ENV['DB_NAME'] %>_production

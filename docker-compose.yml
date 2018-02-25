@@ -1,18 +1,18 @@
 version: '3.3'
 
 services:
-  app:
+  app: &app_base
     depends_on:
       - 'postgres'
       - 'redis'
     build: .
     entrypoint: './docker-entrypoint.sh'
-    command: puma -C config/puma.rb
+    command: bundle exec puma
     ports:
       - '3000:3000'
     volumes:
       - 'bundle_cache:/bundle'
-      - '.:/app'
+      - 'app-sync:/app:nocopy'
     env_file:
       - '.env'
 
@@ -35,31 +35,15 @@ services:
       - 'redis:/data'
 
   sidekiq:
+    <<: *app_base
+    command: bundle exec sidekiq
+    ports: []
     depends_on:
-      - 'postgres'
-      - 'redis'
-    build: .
-    command: sidekiq -C config/sidekiq.yml.erb
-    volumes:
-      - 'bundle_cache:/bundle'
-      - '.:/app'
-    env_file:
-      - '.env'
-
-  cable:
-    depends_on:
-      - 'redis'
-    build: .
-    command: puma -p 28080 cable/config.ru
-    ports:
-      - '28080:28080'
-    volumes:
-      - 'bundle_cache:/bundle'
-      - '.:/app'
-    env_file:
-      - '.env'
+      - 'app'
 
 volumes:
+  app-sync:
+    external: true
   redis:
   postgres:
   bundle_cache:

@@ -16,5 +16,9 @@ ENV PATH="${BUNDLE_BIN}:${PATH}"
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
+ADD Gemfile*
+ADD docker /app/docker
+RUN bash docker/bundle.sh
+
 COPY . $APP_HOME
 

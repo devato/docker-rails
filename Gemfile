@@ -39,4 +39,6 @@ group :development do
   gem 'brakeman', :require => false
   gem 'rubocop'
   gem 'better_errors'
+  gem 'guard-livereload', '~> 2.5', require: false
+  gem 'rack-livereload'
 end

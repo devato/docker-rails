@@ -7,14 +7,17 @@ services:
       - 'redis'
     build: .
     entrypoint: './docker-entrypoint.sh'
-    command: bundle exec puma
+    command: bundle exec puma -C config/puma.rb
     ports:
       - '3000:3000'
+      - '35729:35729'
     volumes:
       - 'bundle_cache:/bundle'
       - 'app-sync:/app:nocopy'
     env_file:
       - '.env'
+    stdin_open: true
+    tty: true
 
   postgres:
     image: 'postgres:9.6-alpine'
